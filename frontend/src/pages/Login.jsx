@@ -1,11 +1,14 @@
 import React from "react"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Button } from "react-bootstrap"
+import { UserContext } from "../context/UserContext"
 
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+
+    const { handleLogin } = useContext(UserContext)
 
     const validarFormulario = (evento) => {
         evento.preventDefault()
@@ -29,15 +32,7 @@ export default function Login() {
         
         // Enviar datos
         alert(`¡Has logrado ingresar!`)
-    }
-
-    //manejo login y logout con useState (encontré esto investigando las posibilidades y me gustó)
-    const [token, setToken] = useState(false)
-    const handleLogin = () => {
-        setToken(true)
-    }
-    const handleLogout = () => {
-        setToken(false)
+        handleLogin()
     }
     
     return (
@@ -66,7 +61,7 @@ export default function Login() {
                 </div>
                 {/* {error ? <p style={{color: "red"}}>Todos los campos son obligatorios.</p> : null} */}
                 {error && <p style={{color: "red"}}>{error}</p>}
-                    <Button type="submit" className="mx-auto btn btn-info text-light" onClick={handleLogin}>
+                    <Button type="submit" className="mx-auto btn btn-info text-light">
                     Ingresar
                     </Button>
             </form>

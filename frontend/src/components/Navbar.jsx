@@ -34,8 +34,7 @@ const Navbar = () => {
                         ) : (
                             <>
                                 <Link to="/login">
-                                    <Button variant="outline-light" 
-                                onClick={handleLogin}>🔐Login</Button>
+                                    <Button variant="outline-light">🔐Login</Button>
                                 </Link>
                                 <Link to="/register">
                                     <Button variant="outline-light">🔐Register</Button>

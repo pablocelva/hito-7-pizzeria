@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useContext } from 'react'
 import './App.css'
 //Importando Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -14,58 +12,57 @@ import Cart from './pages/Cart'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 import { Pizza } from './pages/Pizza'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import CartProvider from './context/CartContext'
-import PizzaProvider, { PizzaContext } from './context/PizzaContext'
-import { UserProvider } from './context/UserContext'
+import PizzaProvider from './context/PizzaContext'
+import { UserContext, UserProvider } from './context/UserContext'
 //Importando data de pizzas
 //import { pizzas } from './data/pizzas'
 
 function App() {
+  const { token } = useContext(UserContext)
   return (
     <>
-      <UserProvider>
-        <PizzaProvider>
-          <CartProvider>
-            <Navbar/>
-            <Routes>
-              <Route 
-              path='/'
-              element={<Home />}
-              />
-              <Route 
-              path='/register'
-              element={<Registro />}
-              />
-              <Route 
-              path='/login'
-              element={<Login />}
-              />
-              <Route 
-              path='/cart'
-              element={<Cart />}
-              />
-              <Route 
-              path='/pizza/:id'
-              element={<Pizza />}
-              />
-              <Route 
-              path='/profile'
-              element={<Profile />}
-              />
-              <Route 
-              path='/404'
-              element={<NotFound />}
-              />
-              <Route 
-              path='/*'
-              element={<NotFound />}
-              />
-            </Routes>
-            <Footer/>
-          </CartProvider>
-        </PizzaProvider>
-      </UserProvider>
+      <PizzaProvider>
+        <CartProvider>
+          <Navbar/>
+          <Routes>
+            <Route 
+            path='/'
+            element={<Home />}
+            />
+            <Route 
+            path='/register'
+            element={token ? <Navigate to={"/"} /> : <Registro />}
+            />
+            <Route 
+            path='/login'
+            element={token ? <Navigate to={"/"} /> : <Login />}
+            />
+            <Route 
+            path='/cart'
+            element={<Cart />}
+            />
+            <Route 
+            path='/pizza/:id'
+            element={<Pizza />}
+            />
+            <Route 
+            path='/profile'
+            element={token ? <Profile /> : <Navigate to={"/login"} />}
+            />
+            <Route 
+            path='/404'
+            element={<NotFound />}
+            />
+            <Route 
+            path='/*'
+            element={<NotFound />}
+            />
+          </Routes>
+          <Footer/>
+        </CartProvider>
+      </PizzaProvider>
     </>
   )
 }
