@@ -2,11 +2,12 @@ import { useState, useContext } from 'react'
 import { pizzaCart } from '../data/pizzas'
 import {Card, Button, Container} from 'react-bootstrap'
 import { CartContext } from '../context/CartContext'
+import { UserContext } from '../context/UserContext'
 
 
 export default function Cart() {
     const { cart, setCart, total, agregarAlCarrito, sumarCantidad, restarCantidad } = useContext(CartContext)
-    //const [cart, setCart] = useState(pizzaCart)
+    const { token } = useContext(UserContext)    
 
     return (
         <Container fluid className="d-flex justify-content-center align-items-center min-vh-100">
@@ -38,7 +39,12 @@ export default function Cart() {
                 <Card.Footer className='p-3'>
                     <Card.Title className='text-center'>Total: ${total.toLocaleString()}</Card.Title>
                     <div className="card-btn d-flex gap-2 justify-content-around">
-                        <Button variant="dark">Pagar 🛒</Button>
+                        <Button 
+                        variant="dark"
+                        disabled={!token}
+                        >
+                            Pagar 🛒
+                        </Button>
                     </div>
                 </Card.Footer>
             </Card>

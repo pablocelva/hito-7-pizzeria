@@ -17,52 +17,55 @@ import { Pizza } from './pages/Pizza'
 import { Route, Routes } from 'react-router-dom'
 import CartProvider from './context/CartContext'
 import PizzaProvider, { PizzaContext } from './context/PizzaContext'
+import { UserProvider } from './context/UserContext'
 //Importando data de pizzas
 //import { pizzas } from './data/pizzas'
 
 function App() {
   return (
     <>
-      <PizzaProvider>
-        <CartProvider>
-          <Navbar/>
-          <Routes>
-            <Route 
-            path='/'
-            element={<Home />}
-            />
-            <Route 
-            path='/register'
-            element={<Registro />}
-            />
-            <Route 
-            path='/login'
-            element={<Login />}
-            />
-            <Route 
-            path='/cart'
-            element={<Cart />}
-            />
-            <Route 
-            path='/pizza/:id'
-            element={<Pizza />}
-            />
-            <Route 
-            path='/profile'
-            element={<Profile />}
-            />
-            <Route 
-            path='/404'
-            element={<NotFound />}
-            />
-            <Route 
-            path='/*'
-            element={<NotFound />}
-            />
-          </Routes>
-          <Footer/>
-        </CartProvider>
-      </PizzaProvider>
+      <UserProvider>
+        <PizzaProvider>
+          <CartProvider>
+            <Navbar/>
+            <Routes>
+              <Route 
+              path='/'
+              element={<Home />}
+              />
+              <Route 
+              path='/register'
+              element={<Registro />}
+              />
+              <Route 
+              path='/login'
+              element={<Login />}
+              />
+              <Route 
+              path='/cart'
+              element={<Cart />}
+              />
+              <Route 
+              path='/pizza/:id'
+              element={<Pizza />}
+              />
+              <Route 
+              path='/profile'
+              element={<Profile />}
+              />
+              <Route 
+              path='/404'
+              element={<NotFound />}
+              />
+              <Route 
+              path='/*'
+              element={<NotFound />}
+              />
+            </Routes>
+            <Footer/>
+          </CartProvider>
+        </PizzaProvider>
+      </UserProvider>
     </>
   )
 }

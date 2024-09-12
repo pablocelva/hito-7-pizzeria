@@ -4,7 +4,7 @@ import { pizzaCart } from '../data/pizzas'
 export const CartContext = createContext()
 
 const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState(pizzaCart || [])
+    const [cart, setCart] = useState([])
     
     // Calcular el total sumando el precio de cada producto multiplicado por su cantidad
     const total = cart?.reduce((acc, item) => acc + (item.price * item.count), 0) || 0

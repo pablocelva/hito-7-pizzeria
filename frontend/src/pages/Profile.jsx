@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import {Card, Button, Container} from 'react-bootstrap'
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Profile = () => {
+  const { handleLogout } = useContext(UserContext)
   return (
     <Container fluid className="d-flex justify-content-center align-items-center my-5 py-5">
     <Card className='cart my-5'>
@@ -20,7 +23,7 @@ const Profile = () => {
             {/* <Card.Title className='text-center'>Cerrar Sesion</Card.Title> */}
             <div className="card-btn d-flex gap-2 justify-content-around">
               <Link to='/'>
-                <Button variant="dark">Cerrar Sesión</Button>
+                <Button onClick={handleLogout} variant="dark">Cerrar Sesión</Button>
               </Link>
             </div>
         </Card.Footer>

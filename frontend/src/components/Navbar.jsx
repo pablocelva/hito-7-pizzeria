@@ -2,21 +2,12 @@ import { useState, useContext } from 'react'
 import { Button, Dropdown, DropdownButton } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
+import { UserContext } from '../context/UserContext'
 
 const Navbar = () => {
-    const { total, cart, setCart } = useContext(CartContext)
-    //const token = false
-    //const token = true
-
-    //manejo login y logout con useState (encontré esto investigando las posibilidades y me gustó)
-    const [token, setToken] = useState(false)
-    const handleLogin = () => {
-        setToken(true)
-    }
-    const handleLogout = () => {
-        setToken(false)
-    }
-
+    const { total } = useContext(CartContext)
+    const { token, handleLogin, handleLogout } = useContext(UserContext)
+    
     return (
         <>
             <nav className="d-flex justify-content-between align-items-center p-3 text-white">
